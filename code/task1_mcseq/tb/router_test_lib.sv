@@ -8,9 +8,9 @@ class base_test extends uvm_test;
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
         uvm_config_int::set(this, "*", "recording_detail", 1);
-         uvm_config_wrapper::set(this, "tb.YAPP.agent.sequencer.run_phase",
-                                "default_sequence",
-                                yapp_5_packets::get_type());
+        //  uvm_config_wrapper::set(this, "tb.YAPP.agent.sequencer.run_phase",
+        //                         "default_sequence",
+        //                         yapp_5_packets::get_type());
         // tb = new("tb", this);
         tb = router_tb::type_id::create("tb", this);
         `uvm_info("BUILD_PHASE", "Build Phase of Testbench is being executed", UVM_HIGH);
@@ -141,10 +141,31 @@ class test_uvc_integration extends base_test;
 
     function void build_phase(uvm_phase phase);
         super.build_phase(phase);
+        set_type_override_by_type(yapp_packet::get_type(), short_yapp_packet::get_type());
         uvm_config_wrapper::set(this, "tb.YAPP.agent.sequencer.run_phase", "default_sequence", four_channel_seq::get_type());
         uvm_config_wrapper::set(this, "tb.chan?.rx_agent.sequencer.run_phase", "default_sequence", channel_rx_resp_seq::get_type());
         uvm_config_wrapper::set(this, "tb.clk_rst.agent.sequencer.run_phase", "default_sequence", clk10_rst5_seq::get_type());
         uvm_config_wrapper::set(this, "tb.hbus.masters[?].sequencer.run_phase","default_sequence",hbus_small_packet_seq::get_type());    
+
+    endfunction
+
+endclass
+
+class new_test_multi extends base_test;
+    `uvm_component_utils(new_test_multi)
+
+    function new(string name = "new_test_multi", uvm_component parent);
+        super.new(name, parent);
+    endfunction
+
+    function void build_phase(uvm_phase phase);
+        super.build_phase(phase);
+        set_type_override_by_type(yapp_packet::get_type(), short_yapp_packet::get_type());
+        // uvm_config_wrapper::set(this, "tb.YAPP.agent.sequencer.run_phase", "default_sequence", four_channel_seq::get_type());
+        uvm_config_wrapper::set(this, "tb.chan?.rx_agent.sequencer.run_phase", "default_sequence", channel_rx_resp_seq::get_type());
+        uvm_config_wrapper::set(this, "tb.clk_rst.agent.sequencer.run_phase", "default_sequence", clk10_rst5_seq::get_type());
+        // uvm_config_wrapper::set(this, "tb.hbus.masters[?].sequencer.run_phase","default_sequence",hbus_small_packet_seq::get_type());    
+        uvm_config_wrapper::set(this, "tb.mcsequencer.run_phase","default_sequence",router_simple_mcseq::get_type());    
 
     endfunction
 

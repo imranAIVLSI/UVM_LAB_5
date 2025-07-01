@@ -1,5 +1,5 @@
 # Ignore Simvision folder
-.simvision/
+./.simvision/
 
 # Ignore waveform and simulation output directories
 waves.shm/

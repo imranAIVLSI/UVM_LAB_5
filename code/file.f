@@ -30,7 +30,7 @@
 ./router_rtl/yapp_router.sv
 ./task1_mcseq/tb/hw_top_no_dut.sv
 ./task1_mcseq/tb/tb_top.sv
-+UVM_TESTNAME=test_uvc_integration
++UVM_TESTNAME=new_test_multi
 +UVM_VERBOSITY=UVM_HIGH
 +SVSEED=random
 //*** add compile files here

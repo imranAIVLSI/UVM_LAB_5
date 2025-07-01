@@ -35,13 +35,14 @@ class router_tb extends uvm_env;
     endfunction
 
     function void connect_phase(uvm_phase phase);
-        mcsequencer.hbus_seqr = hbus.master[0].sequencer;
-        mcsequencer.yapp_seqr = YAPP.tx.sequencer;
+        super.connect_phase(phase);
+        mcsequencer.hbus_seqr = hbus.masters[0].sequencer;
+        mcsequencer.yapp_seqr = YAPP.agent.sequencer;
     endfunction
 
 
-    function void start_of_simulation_phase(uvm_phase phase);
-        `uvm_info(get_type_name(),"Running Simulation...", UVM_HIGH);
-    endfunction
+    // function void start_of_simulation_phase(uvm_phase phase);
+    //     `uvm_info(get_type_name(),"Running Simulation...", UVM_HIGH);
+    // endfunction
 
 endclass
