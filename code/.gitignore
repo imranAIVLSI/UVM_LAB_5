@@ -1,0 +1,12 @@
+# Ignore Simvision folder
+.simvision/
+
+# Ignore waveform and simulation output directories
+waves.shm/
+xcelium.d/
+xcelium.shm/
+
+# Ignore log and history files
+qalog.txt
+xrun.history
+xrun.key
