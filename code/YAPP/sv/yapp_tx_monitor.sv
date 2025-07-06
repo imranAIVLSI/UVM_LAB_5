@@ -5,9 +5,12 @@ class yapp_tx_monitor extends uvm_monitor;
     virtual yapp_if vif;
     int num_pkt_col; // count packets collected
     yapp_packet pkt;
+    // TLM ports used to connect the monitor to the scoreboard
+    uvm_analysis_port #(yapp_packet) yapp_out;
 
     function new(string name = "yapp_tx_monitor", uvm_component parent);
         super.new(name, parent);
+        yapp_out = new("yapp_out", this);
     endfunction
 
     task run_phase(uvm_phase phase);
@@ -28,6 +31,8 @@ class yapp_tx_monitor extends uvm_monitor;
             end_tr(pkt);
             `uvm_info(get_type_name(), $sformatf("Packet Collected : \n%s", pkt.sprint()), UVM_LOW)
             num_pkt_col++;
+             // Send packet to scoreboard via TLM write()
+            yapp_out.write(pkt); //
         end
 
     endtask

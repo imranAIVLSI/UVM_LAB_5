@@ -46,12 +46,12 @@ class yapp_packet extends uvm_sequence_item;
   constraint delay { packet_delay inside {[1:20]};}
   // Add methods for parity calculation and class construction
   function bit [7:0] calc_parity();
-    parity = 8'b00;
+    calc_parity = 8'b00;
     foreach(payload[i]) begin
-      parity ^= payload[i];
+      calc_parity ^= payload[i];
     end
-    parity ^= {addr, length};
-    return parity;
+    calc_parity ^= {length, addr};
+    return calc_parity;
   endfunction
 
   function void post_randomization();

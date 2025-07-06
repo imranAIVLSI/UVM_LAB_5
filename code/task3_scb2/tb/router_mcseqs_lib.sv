@@ -48,7 +48,9 @@ class router_simple_mcseq extends uvm_sequence;
         `uvm_do_on(h_small, p_sequencer.hbus_seqr)
         `uvm_do_on(maxpkt_reg, p_sequencer.hbus_seqr)
         repeat(2) 
+        begin
             `uvm_do_on(six_012_seq, p_sequencer.yapp_seqr)
+        end
         `uvm_do_on(lrg_payload, p_sequencer.hbus_seqr)
         `uvm_do_on(maxpkt_reg, p_sequencer.hbus_seqr)
         `uvm_do_on(rand_6_seq, p_sequencer.yapp_seqr)

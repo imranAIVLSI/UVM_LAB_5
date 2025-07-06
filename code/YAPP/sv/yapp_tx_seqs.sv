@@ -213,7 +213,7 @@ class yapp_rnd_seq extends yapp_base_seq;
     `uvm_info(get_type_name(), "" , UVM_LOW)
     ok = randomize() with {count inside {[1:10]};};
     `uvm_info("count", $sformatf("count value is %0d", count), UVM_HIGH)
-    repeat(count) begin
+    repeat(6) begin
       `uvm_do(req)
     end
   endtask
